@@ -26,4 +26,4 @@ All the other specific requirements are up to you
 * Structure your code
 * Use best practises
 * Use naming conventions
-* Show understanding of software development concepts
+* Show understanding of software development concepts 
