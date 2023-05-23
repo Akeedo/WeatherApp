@@ -8,6 +8,9 @@ import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.Route;
 import jakarta.persistence.Column;
 import org.apache.commons.lang3.StringUtils;
+import com.vaadin.flow.function.ValueProvider;
+
+
 
 import java.awt.*;
 
@@ -19,23 +22,17 @@ public class CityListView extends VerticalLayout {
     public CityListView(CityService cityService) {
         this.cityService = cityService;
         Grid<City> grid = new Grid<>(City.class);
-
-        // Fetch data from backend with defined page size
-        DataProvider<City, Void> dataProvider = DataProvider.fromCallbacks(
-                query -> cityService.findAll(query.getOffset(), query.getLimit()).stream(),
-                query -> Math.toIntExact(cityService.count())
-        );
-
+        ListDataProvider<City> dataProvider = new ListDataProvider<>(cityService.findAll(0, Integer.MAX_VALUE));
         grid.setDataProvider(dataProvider);
-        grid.setPageSize(10); // Page size set to 10
 
         // configure filters
         HeaderRow filterRow = grid.appendHeaderRow();
-        for (Column<City> col : grid.getColumns()) {
+        for (Grid.Column<City> col : grid.getColumns()) {
             TextField filterField = new TextField();
+            ValueProvider<City, String> valueProvider = col::getValue;
             filterField.addValueChangeListener(event -> {
                 dataProvider.addFilter(
-                        city -> StringUtils.containsIgnoreCase(col.getKey(), filterField.getValue()));
+                        city -> StringUtils.containsIgnoreCase(valueProvider.apply(city), filterField.getValue()));
             });
             filterRow.getCell(col).setComponent(filterField);
         }
