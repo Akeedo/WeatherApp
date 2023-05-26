@@ -27,8 +27,13 @@ public class MainView extends VerticalLayout {
     private TextField filter = new TextField();
     private Button searchButton = new Button("Search");
     public MainView() {
-        filter.setPlaceholder("Filter by location name...");
-        grid.setColumns("location");
+        filter.setPlaceholder("Filter by City name...");
+        grid.addColumn(CityData::getCity).setHeader("Name");
+        grid.addColumn(CityData::getLongitude).setHeader("Longitude");
+        grid.addColumn(CityData::getLatitude).setHeader("Latitude");
+        grid.addColumn(CityData::getState).setHeader("State");
+        grid.addColumn(CityData::getCountry).setHeader("Country");
+        grid.setColumns("city", "longitude", "latitude", "state", "country");
         grid.setItems();
 
 
