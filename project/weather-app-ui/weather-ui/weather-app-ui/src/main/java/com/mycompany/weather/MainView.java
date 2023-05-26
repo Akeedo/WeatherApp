@@ -36,6 +36,10 @@ public class MainView extends VerticalLayout {
         grid.setColumns("city", "longitude", "latitude", "state", "country");
         grid.setItems();
 
+        grid.addItemClickListener(event -> {
+            CityData cityData = event.getItem();
+            Notification.show("Clicked on " + cityData.getCity());
+        });
 
         searchButton.addClickListener(click -> {
             try {
@@ -60,7 +64,7 @@ public class MainView extends VerticalLayout {
         if (response.statusCode() == 200) {
             String responseBody = response.body();
             JSONArray json = new JSONArray(responseBody);
-            grid.setItems(json.toList().stream().map(o -> new WeatherData(new JSONObject((Map) o))));
+            grid.setItems(json.toList().stream().map(o -> new CityData(new JSONObject((Map) o))));
         } else {
             String errorMessage = "Failed to fetch location data. HTTP Status Code: " + response.statusCode();
             Notification.show(errorMessage);
