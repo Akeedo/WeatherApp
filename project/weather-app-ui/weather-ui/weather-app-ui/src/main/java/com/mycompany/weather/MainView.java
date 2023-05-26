@@ -12,6 +12,26 @@ import com.vaadin.flow.router.Route;
 @Route
 @PWA(name = "My Application", shortName = "My Application")
 public class MainView extends VerticalLayout {
+    private Grid<WeatherData> grid = new Grid<>(WeatherData.class);
+    private TextField filter = new TextField();
+    private Button searchButton = new Button("Search");
+    public MainView() {
+        filter.setPlaceholder("Filter by location name...");
+        grid.setColumns("location");
+        grid.setItems();
+
+
+        searchButton.addClickListener(click -> {
+            try {
+                fetchLocations(filter.getValue());
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+                Notification.show("An error occurred while fetching location data. Please try again.");
+            }
+        });
+
+        add(filter, searchButton, grid);
+    }
 
     private void fetchLocations(String cityName) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
