@@ -23,7 +23,7 @@ import java.util.Map;
 @Route
 @PWA(name = "My Application", shortName = "My Application")
 public class MainView extends VerticalLayout {
-    private Grid<WeatherData> grid = new Grid<>(WeatherData.class);
+    private Grid<CityData> grid = new Grid<>(CityData.class);
     private TextField filter = new TextField();
     private Button searchButton = new Button("Search");
     public MainView() {
