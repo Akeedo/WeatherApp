@@ -6,6 +6,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 @Route("WeatherDetails/:longitude/:latitude")
+public class WeatherDetails extends VerticalLayout implements HasUrlParameter<String> {
     private String longitude;
     private String latitude;
     public WeatherDetails(){
