@@ -1,5 +1,9 @@
 package com.mycompany.weather;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
@@ -7,14 +11,13 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.router.Route;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,7 +26,7 @@ import java.util.Map;
 @Route
 @PWA(name = "My Application", shortName = "My Application")
 public class MainView extends VerticalLayout {
-    private Grid<CityData> grid = new Grid<>(CityData.class);
+    private Grid<City> grid = new Grid<>(City.class);
     private TextField filter = new TextField();
     private Button searchButton = new Button("Search");
     public MainView() {
