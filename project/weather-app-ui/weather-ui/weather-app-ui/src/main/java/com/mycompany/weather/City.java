@@ -1,14 +1,14 @@
 package com.mycompany.weather;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.json.JSONObject;
 
-import java.math.BigDecimal;
-
 @Getter
 @Setter
-public class CityData {
+@NoArgsConstructor
+public class City {
     private long id;
     private String name;
     private double latitude;
@@ -26,7 +26,7 @@ public class CityData {
     private String admin2;
 
 
-    public CityData(JSONObject jsonObject){
+    public City(JSONObject jsonObject){
         this.id = jsonObject.has("id") ? jsonObject.getLong("id") : 0;
         this.name = jsonObject.has("name") ? jsonObject.getString("name") : "";
         this.latitude = jsonObject.has("latitude") ? jsonObject.getDouble("latitude") : 0.0;
