@@ -39,6 +39,7 @@ public class MainView extends VerticalLayout {
         grid.addItemClickListener(event -> {
             CityData cityData = event.getItem();
             Notification.show("Clicked on " + cityData.getCity());
+            UI.getCurrent().navigate("WeatherDetails/" + cityData.getLongitude().toString() + "/" + cityData.getLatitude().toString());
         });
 
         searchButton.addClickListener(click -> {
