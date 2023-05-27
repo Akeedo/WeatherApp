@@ -10,7 +10,7 @@ import com.vaadin.flow.router.*;
 import java.util.Arrays;
 import java.util.List;
 
-@Route("WeatherDetails/:longitude/:latitude")
+@Route("WeatherDetails")
 public class WeatherDetails extends VerticalLayout implements HasUrlParameter<String> {
     private String longitude;
     private String latitude;
