@@ -69,15 +69,22 @@ public class MainView extends VerticalLayout {
     private void fetchLocations(String cityName) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://api.openweathermap.org/geo/1.0/direct?q="+cityName+"&limit=5&appid=e6e1309d61b8430fe739ae6b30ff3dd2"))
+                .uri(URI.create("https://geocoding-api.open-meteo.com/v1/search?name="+cityName+"&count=10&language=en&format=json"))
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() == 200) {
             String responseBody = response.body();
-            JSONArray json = new JSONArray(responseBody);
-            grid.setItems(json.toList().stream().map(o -> new CityData(new JSONObject((Map) o))));
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            try{
+                CityResponse cityResponse = objectMapper.readValue(responseBody, CityResponse.class);
+                List<City> cities = cityResponse.getResults();
+                grid.setItems(cities);
+            }catch (JsonProcessingException e){
+                e.printStackTrace();
+            }
         } else {
             String errorMessage = "Failed to fetch location data. HTTP Status Code: " + response.statusCode();
             Notification.show(errorMessage);
