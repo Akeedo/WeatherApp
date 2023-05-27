@@ -28,12 +28,24 @@ public class MainView extends VerticalLayout {
     private Button searchButton = new Button("Search");
     public MainView() {
         filter.setPlaceholder("Filter by City name...");
-        grid.addColumn(CityData::getCity).setHeader("Name");
-        grid.addColumn(CityData::getLongitude).setHeader("Longitude");
-        grid.addColumn(CityData::getLatitude).setHeader("Latitude");
-        grid.addColumn(CityData::getState).setHeader("State");
-        grid.addColumn(CityData::getCountry).setHeader("Country");
-        grid.setColumns("city", "longitude", "latitude", "state", "country");
+        grid.addColumn(City::getId).setHeader("ID");
+        grid.addColumn(City::getName).setHeader("Name");
+        grid.addColumn(City::getLongitude).setHeader("Longitude");
+        grid.addColumn(City::getLatitude).setHeader("Latitude");
+        grid.addColumn(City::getElevation).setHeader("Elevation");
+        grid.addColumn(City::getFeatureCode).setHeader("Feature Code");
+        grid.addColumn(City::getCountryCode).setHeader("Country Code");
+        grid.addColumn(City::getAdmin1Id).setHeader("Admin1 ID");
+        grid.addColumn(City::getAdmin2Id).setHeader("Admin2 ID");
+        grid.addColumn(City::getTimezone).setHeader("Timezone");
+        grid.addColumn(City::getPopulation).setHeader("Population");
+        grid.addColumn(City::getCountryId).setHeader("Country ID");
+        grid.addColumn(City::getCountry).setHeader("Country");
+        grid.addColumn(City::getAdmin1).setHeader("Admin1");
+        grid.addColumn(City::getAdmin2).setHeader("Admin2");
+        grid.setColumns("id", "name", "longitude", "latitude", "elevation", "featureCode",
+                "countryCode", "admin1Id", "admin2Id", "timezone", "population",
+                "countryId", "country", "admin1", "admin2");
         grid.setItems();
 
         grid.addItemClickListener(event -> {
