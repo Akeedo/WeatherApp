@@ -91,6 +91,40 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
 
     }
 
+    public void setColumnsToGridDailyWeatherGrid(Optional<List<DailyWeather>> dailyWeatherOpt){
+        if(dailyWeatherOpt.isPresent()){
+            List<DailyWeather> dailyWeathers = dailyWeatherOpt.get();
+            gridDailyWeather.removeAllColumns();
+
+            gridDailyWeather.addColumn(DailyWeather::getTime)
+                    .setHeader("Time")
+                    .setSortable(true);
+
+            gridDailyWeather.addColumn(DailyWeather::getTemperature2mMax)
+                    .setHeader("Max Temp (2m)")
+                    .setSortable(true);
+
+            gridDailyWeather.addColumn(DailyWeather::getTemperature2mMin)
+                    .setHeader("Min Temp (2m)")
+                    .setSortable(true);
+
+            gridDailyWeather.addColumn(DailyWeather::getApparentTemperatureMax)
+                    .setHeader("Max Apparent Temp")
+                    .setSortable(true);
+
+            gridDailyWeather.addColumn(DailyWeather::getRainSum)
+                    .setHeader("Total Rainfall")
+                    .setSortable(true);
+
+            gridDailyWeather.addColumn(DailyWeather::getWindSpeed10mMax)
+                    .setHeader("Max Wind Speed (10m)")
+                    .setSortable(true);
+
+            gridDailyWeather.setItems(dailyWeathers);
+        } else{
+            Notification.show("No data available", 3000, Notification.Position.MIDDLE);
+        }
+    }
     private DailyWeatherForecast fetchDailyWeather(String longitude, String latitude) throws IOException, InterruptedException {
         double longitudeAsDouble = Double.parseDouble(longitude);
         double latitudeAsDouble = Double.parseDouble(latitude);
