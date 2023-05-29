@@ -30,7 +30,7 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
     private String latitude;
     private HorizontalLayout layout;
 
-    private Grid<DailyWeather> gridDailyWeather = new Grid<>(DailyWeather.class);
+    private Grid<DailyWeather> gridDailyWeather = new Grid<>();
 
     private static final Logger LOGGER = LogManager.getLogger(WeatherDetails.class);
 
