@@ -1,20 +1,19 @@
 package com.mycompany.weather;
 
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class DailyWeather {
-    private List<String> time;
-    private List<Double> temperature2mMax;
-    private List<Double> temperature2mMin;
-    private List<Double> apparentTemperatureMax;
-    private List<Double> rainSum;
-    private List<Double> windSpeed10mMax;
+    private String time;
+    private Double temperature2mMax;
+    private Double temperature2mMin;
+    private Double apparentTemperatureMax;
+    private Double rainSum;
+    private Double windSpeed10mMax;
 }
