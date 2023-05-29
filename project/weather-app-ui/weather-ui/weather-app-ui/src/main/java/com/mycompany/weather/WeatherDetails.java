@@ -98,8 +98,10 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             try{
-                WeatherDataDaily dailyData = objectMapper.readValue(responseBody, WeatherDataDaily.class);
-                List<String> timeList = dailyData.getDaily().getTime();
+                DailyWeatherResponse dailyWeatherResponse = objectMapper.readValue(responseBody, DailyWeatherResponse.class);
+
+                DailyWeatherForecast weatherForecast = dailyWeatherResponse.getDailyWeatherForecast();
+                convertDailyWeatherToList(weatherForecast);
 
                 List<Double> maxTemp2mList = dailyData.getDaily().getTemperature2mMax();
                 List<Double> minTemp2mList = dailyData.getDaily().getTemperature2mMin();
