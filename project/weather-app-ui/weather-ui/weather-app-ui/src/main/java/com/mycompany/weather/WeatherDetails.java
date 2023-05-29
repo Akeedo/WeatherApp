@@ -68,6 +68,12 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
             Label longitudeLabel = new Label("Longitude: " + longitude);
             Label latitudeLabel = new Label("Latitude: " + latitude);
             layout.add(longitudeLabel, latitudeLabel);
+            try {
+                fetchDailyWeather(longitude,latitude);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
         }
     }
 
