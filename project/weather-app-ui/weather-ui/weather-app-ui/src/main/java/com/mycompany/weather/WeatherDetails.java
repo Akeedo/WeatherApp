@@ -8,7 +8,6 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.BoxSizing;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
@@ -23,6 +22,7 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Route("WeatherDetails")
 public class WeatherDetails extends VerticalLayout implements HasUrlParameter<String>, BeforeEnterObserver {
@@ -68,19 +68,19 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
             Label longitudeLabel = new Label("Longitude: " + longitude);
             Label latitudeLabel = new Label("Latitude: " + latitude);
             layout.add(longitudeLabel, latitudeLabel);
+
             try {
                 fetchDailyWeather(longitude,latitude);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
+            }
         }
     }
-
-
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-        System.out.println("Hello World");
+
     }
 
     private void fetchDailyWeather(String longitude, String latitude) throws IOException, InterruptedException {
@@ -102,12 +102,7 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
 
                 DailyWeatherForecast weatherForecast = dailyWeatherResponse.getDailyWeatherForecast();
                 convertDailyWeatherToList(weatherForecast);
-
-                List<Double> maxTemp2mList = dailyData.getDaily().getTemperature2mMax();
-                List<Double> minTemp2mList = dailyData.getDaily().getTemperature2mMin();
-                List<Double> maxApparentTempList = dailyData.getDaily().getApparentTemperatureMax();
-                List<Double> rainSumList = dailyData.getDaily().getRainSum();
-                List<Double> maxWindSpeed10mList = dailyData.getDaily().getWindSpeed10mMax();
+               
             }catch (JsonProcessingException e){
                 e.printStackTrace();
             }
@@ -116,4 +111,27 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
             Notification.show(errorMessage);
         }
     }
+
+
+
+    public Optional<List<DailyWeather>> convertDailyWeatherToList(DailyWeatherForecast dailyWeatherForecast) {
+        if (dailyWeatherForecast == null || dailyWeatherForecast.getTime() == null || dailyWeatherForecast.getTime().isEmpty()) {
+            return Optional.empty();
+        }
+
+        List<DailyWeather> weatherRowList = new ArrayList<>();
+        for (int i = 0; i < dailyWeatherForecast.getTime().size(); i++) {
+            DailyWeather row = new DailyWeather(
+                    dailyWeatherForecast.getTime().get(i),
+                    dailyWeatherForecast.getTemperature2mMax().get(i),
+                    dailyWeatherForecast.getTemperature2mMin().get(i),
+                    dailyWeatherForecast.getApparentTemperatureMax().get(i),
+                    dailyWeatherForecast.getRainSum().get(i),
+                    dailyWeatherForecast.getWindSpeed10mMax().get(i)
+            );
+            weatherRowList.add(row);
+        }
+        return Optional.of(weatherRowList);
+    }
+
 }
