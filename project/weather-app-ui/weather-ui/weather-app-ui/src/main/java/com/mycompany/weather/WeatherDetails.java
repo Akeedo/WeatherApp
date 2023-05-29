@@ -80,8 +80,14 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
     }
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
+        try {
             DailyWeatherForecast weatherForecast = fetchDailyWeather(longitude, latitude);
             Optional<List<DailyWeather>> dailyWeather = convertDailyWeatherToList(weatherForecast);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
