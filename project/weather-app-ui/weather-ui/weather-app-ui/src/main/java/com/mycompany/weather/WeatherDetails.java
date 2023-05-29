@@ -83,7 +83,7 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
 
     }
 
-    private void fetchDailyWeather(String longitude, String latitude) throws IOException, InterruptedException {
+    private DailyWeatherForecast fetchDailyWeather(String longitude, String latitude) throws IOException, InterruptedException {
         double longitudeAsDouble = Double.parseDouble(longitude);
         double latitudeAsDouble = Double.parseDouble(latitude);
         HttpClient client = HttpClient.newHttpClient();
@@ -101,14 +101,16 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
                 DailyWeatherResponse dailyWeatherResponse = objectMapper.readValue(responseBody, DailyWeatherResponse.class);
 
                 DailyWeatherForecast weatherForecast = dailyWeatherResponse.getDailyWeatherForecast();
-                convertDailyWeatherToList(weatherForecast);
+                return weatherForecast;
                
             }catch (JsonProcessingException e){
                 e.printStackTrace();
+                return null;
             }
         } else {
             String errorMessage = "Failed to fetch location data. HTTP Status Code: " + response.statusCode();
             Notification.show(errorMessage);
+            return null;
         }
     }
 
