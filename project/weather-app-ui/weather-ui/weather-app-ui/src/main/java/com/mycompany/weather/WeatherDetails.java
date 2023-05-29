@@ -83,6 +83,7 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
         try {
             DailyWeatherForecast weatherForecast = fetchDailyWeather(longitude, latitude);
             Optional<List<DailyWeather>> dailyWeather = convertDailyWeatherToList(weatherForecast);
+            setColumnsToGridDailyWeatherGrid(dailyWeather);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
