@@ -126,6 +126,7 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
             Notification.show("No data available", 3000, Notification.Position.MIDDLE);
         }
     }
+
     private DailyWeatherForecast fetchDailyWeather(String longitude, String latitude) throws IOException, InterruptedException {
         double longitudeAsDouble = Double.parseDouble(longitude);
         double latitudeAsDouble = Double.parseDouble(latitude);
