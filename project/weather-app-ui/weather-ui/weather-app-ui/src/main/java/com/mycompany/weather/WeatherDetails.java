@@ -166,7 +166,7 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
                 gridHourlyWeather.addColumn(HourlyWeather::getWindSpeed10M)
                         .setHeader("Wind Speed 10m")
                         .setSortable(true);
-            }
+            gridHourlyWeather.setItems(hourlyWeathers);
         }
     }
 
