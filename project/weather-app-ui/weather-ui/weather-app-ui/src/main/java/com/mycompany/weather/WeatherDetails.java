@@ -253,4 +253,23 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
         return Optional.of(weatherRowList);
     }
 
+    public Optional<List<HourlyWeather>> convertHourlyWeatherToList(HourlyWeatherForecast hourlyWeatherForecast) {
+        if (hourlyWeatherForecast == null) {
+            return Optional.empty();
+        }
+
+        List<HourlyWeather> hourlyWeatherList = new ArrayList<>();
+        for (int i = 0; i < hourlyWeatherForecast.getTime().size(); i++) {
+            HourlyWeather hourlyWeather = new HourlyWeather(
+                    hourlyWeatherForecast.getTime().get(i),
+                    hourlyWeatherForecast.getTemperature2M().get(i),
+                    hourlyWeatherForecast.getRelativeHumidity2M().get(i),
+                    hourlyWeatherForecast.getRain().get(i),
+                    hourlyWeatherForecast.getWindSpeed10M().get(i)
+            );
+            hourlyWeatherList.add(hourlyWeather);
+        }
+        return Optional.of(hourlyWeatherList);
+    }
+
 }
