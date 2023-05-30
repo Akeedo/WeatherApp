@@ -92,6 +92,9 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
         gridDailyWeather.addItemClickListener(event -> {
             DailyWeather dailyWeatherData = event.getItem();
             Notification.show("Clicked on " + dailyWeatherData.getTime());
+            initializeHourWeatherGrid(dailyWeatherData.getTime());
+        });
+    }
             try {
                 HourlyWeatherForecast hourlyWeatherForecast = fetchHourlyWeather(longitude,latitude,dailyWeatherData.getTime());
                 Optional<List<HourlyWeather>> hourlyWeathers = convertHourlyWeatherToList(hourlyWeatherForecast);
