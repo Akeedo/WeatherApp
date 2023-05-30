@@ -45,16 +45,9 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
         add(header);
 
         layout = new HorizontalLayout();
-
-
-        gridDailyWeather.addColumn(DailyWeather::getTime).setHeader("Time");
-        gridDailyWeather.addColumn(DailyWeather::getTemperature2mMax).setHeader("Max Temperature"); // make sure getTemperature2mMax exists in DailyWeather
-        gridDailyWeather.addColumn(DailyWeather::getTemperature2mMin).setHeader("Min Temperature"); // make sure getTemperature2mMin exists in DailyWeather
-        gridDailyWeather.addColumn(DailyWeather::getApparentTemperatureMax).setHeader("Apparent Max Temperature"); // make sure getApparentTemperatureMax exists in DailyWeather
-        gridDailyWeather.addColumn(DailyWeather::getRainSum).setHeader("Rain Sum"); // make sure getRainSum exists in DailyWeather
-        gridDailyWeather.addColumn(DailyWeather::getWindSpeed10mMax).setHeader("Max Wind Speed"); // make sure getWindSpeed10mMax exists in DailyWeather
-
-        add(layout,gridDailyWeather);
+        gridDailyWeather = new Grid<>(DailyWeather.class);
+        gridHourlyWeather = new Grid<>(HourlyWeather.class);
+        add(layout,gridDailyWeather,gridHourlyWeather);
     }
 
 
