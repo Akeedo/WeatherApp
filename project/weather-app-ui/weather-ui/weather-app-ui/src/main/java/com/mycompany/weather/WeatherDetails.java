@@ -107,7 +107,6 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-        });
     }
     public void setColumnsToGridDailyWeatherGrid(Optional<List<DailyWeather>> dailyWeatherOpt){
         if(dailyWeatherOpt.isPresent()){
