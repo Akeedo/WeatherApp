@@ -127,6 +127,33 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
         }
     }
 
+    private void setColumnsToGridHourlyWeatherGrid(Optional<List<HourlyWeather>> optionalHourlyWeatherList) {
+        if (optionalHourlyWeatherList.isPresent()) {
+            List<HourlyWeather> hourlyWeatherList = optionalHourlyWeatherList.get();
+
+            if (!hourlyWeatherList.isEmpty()) {
+                gridHourlyWeather.removeAllColumns();
+                gridHourlyWeather.setItems(hourlyWeatherList);
+
+                gridHourlyWeather.addColumn(HourlyWeather::getTime)
+                        .setHeader("Time")
+                        .setSortable(true);
+                gridHourlyWeather.addColumn(HourlyWeather::getTemperature2M)
+                        .setHeader("Temperature 2m")
+                        .setSortable(true);
+                gridHourlyWeather.addColumn(HourlyWeather::getRelativeHumidity2M)
+                        .setHeader("Relative Humidity 2m")
+                        .setSortable(true);
+                gridHourlyWeather.addColumn(HourlyWeather::getRain)
+                        .setHeader("Rain")
+                        .setSortable(true);
+                gridHourlyWeather.addColumn(HourlyWeather::getWindSpeed10M)
+                        .setHeader("Wind Speed 10m")
+                        .setSortable(true);
+            }
+        }
+    }
+
     private HourlyWeatherForecast fetchHourlyWeather(String longitude, String latitude, String time) throws IOException, InterruptedException {
         double longitudeAsDouble = Double.parseDouble(longitude);
         double latitudeAsDouble = Double.parseDouble(latitude);
