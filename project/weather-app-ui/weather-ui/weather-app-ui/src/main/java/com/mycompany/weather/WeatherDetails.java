@@ -127,6 +127,37 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
         }
     }
 
+    private HourlyWeatherForecast fetchHourlyWeather(String longitude, String latitude, String time) throws IOException, InterruptedException {
+        double longitudeAsDouble = Double.parseDouble(longitude);
+        double latitudeAsDouble = Double.parseDouble(latitude);
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://api.open-meteo.com/v1/forecast?timezone=Europe%2FLondon&latitude="+ latitude
+                        +"&longitude="+longitude+"&hourly=temperature_2m,relativehumidity_2m,rain,windspeed_10m"
+                        +"&forecast_days=1&start_date="+time+"&end_date="+time))
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if (response.statusCode() == 200) {
+            String responseBody = response.body();
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            try {
+                HourlyWeatherResponse hourlyWeatherResponse = objectMapper.readValue(responseBody, HourlyWeatherResponse.class);
+
+                HourlyWeatherForecast weatherForecast = hourlyWeatherResponse.getHourly();
+                return weatherForecast;
+
+            }catch (JsonProcessingException e){
+                e.printStackTrace();
+            }
+        } else {
+            String errorMessage = "Failed to fetch location data. HTTP Status Code: " + response.statusCode();
+            Notification.show(errorMessage);
+        }
+        return null;
+    }
     private DailyWeatherForecast fetchDailyWeather(String longitude, String latitude) throws IOException, InterruptedException {
         double longitudeAsDouble = Double.parseDouble(longitude);
         double latitudeAsDouble = Double.parseDouble(latitude);
