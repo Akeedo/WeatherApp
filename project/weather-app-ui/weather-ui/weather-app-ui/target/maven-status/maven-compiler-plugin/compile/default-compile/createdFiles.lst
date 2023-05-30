@@ -1,2 +1,10 @@
+com/mycompany/weather/WeatherDetails.class
 com/mycompany/weather/MainView.class
-com/mycompany/weather/WeatherData.class
+com/mycompany/weather/HourlyWeatherResponse.class
+com/mycompany/weather/DailyWeatherResponse.class
+com/mycompany/weather/DailyWeatherForecast.class
+com/mycompany/weather/DailyWeather.class
+com/mycompany/weather/CityResponse.class
+com/mycompany/weather/HourlyWeather.class
+com/mycompany/weather/HourlyWeatherForecast.class
+com/mycompany/weather/City.class
