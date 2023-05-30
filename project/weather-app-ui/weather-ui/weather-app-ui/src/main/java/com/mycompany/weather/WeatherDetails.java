@@ -92,6 +92,21 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
 
     }
 
+    private void clickEventForHourly(){
+        gridDailyWeather.addItemClickListener(event -> {
+            DailyWeather dailyWeatherData = event.getItem();
+            Notification.show("Clicked on " + dailyWeatherData.getTime());
+            try {
+                HourlyWeatherForecast hourlyWeatherForecast = fetchHourlyWeather(longitude,latitude,dailyWeatherData.getTime());
+                Optional<List<HourlyWeather>> hourlyWeathers = convertHourlyWeatherToList(hourlyWeatherForecast);
+                setColumnsToGridHourlyWeatherGrid(hourlyWeathers);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
     public void setColumnsToGridDailyWeatherGrid(Optional<List<DailyWeather>> dailyWeatherOpt){
         if(dailyWeatherOpt.isPresent()){
             List<DailyWeather> dailyWeathers = dailyWeatherOpt.get();
