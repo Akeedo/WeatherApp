@@ -99,6 +99,7 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
             try {
             gridDailyWeather.setVisible(false);
             gridHourlyWeather.setVisible(true);
+            HourlyWeatherForecast hourlyWeatherForecast = fetchHourlyWeather(longitude,latitude,time);
                 Optional<List<HourlyWeather>> hourlyWeathers = convertHourlyWeatherToList(hourlyWeatherForecast);
                 setColumnsToGridHourlyWeatherGrid(hourlyWeathers);
             } catch (IOException e) {
