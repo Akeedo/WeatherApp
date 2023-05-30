@@ -95,8 +95,10 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
             initializeHourWeatherGrid(dailyWeatherData.getTime());
         });
     }
+    private void initializeHourWeatherGrid(String time){
             try {
-                HourlyWeatherForecast hourlyWeatherForecast = fetchHourlyWeather(longitude,latitude,dailyWeatherData.getTime());
+            gridDailyWeather.setVisible(false);
+            gridHourlyWeather.setVisible(true);
                 Optional<List<HourlyWeather>> hourlyWeathers = convertHourlyWeatherToList(hourlyWeatherForecast);
                 setColumnsToGridHourlyWeatherGrid(hourlyWeathers);
             } catch (IOException e) {
