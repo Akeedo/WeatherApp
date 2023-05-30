@@ -143,13 +143,10 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
         }
     }
 
-    private void setColumnsToGridHourlyWeatherGrid(Optional<List<HourlyWeather>> optionalHourlyWeatherList) {
-        if (optionalHourlyWeatherList.isPresent()) {
-            List<HourlyWeather> hourlyWeatherList = optionalHourlyWeatherList.get();
-
-            if (!hourlyWeatherList.isEmpty()) {
+    private void setColumnsToGridHourlyWeatherGrid(Optional<List<HourlyWeather>> hourlyWeatherOpt){
+        if(hourlyWeatherOpt.isPresent()){
+            List<HourlyWeather> hourlyWeathers = hourlyWeatherOpt.get();
                 gridHourlyWeather.removeAllColumns();
-                gridHourlyWeather.setItems(hourlyWeatherList);
 
                 gridHourlyWeather.addColumn(HourlyWeather::getTime)
                         .setHeader("Time")
@@ -166,7 +163,10 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
                 gridHourlyWeather.addColumn(HourlyWeather::getWindSpeed10M)
                         .setHeader("Wind Speed 10m")
                         .setSortable(true);
+
             gridHourlyWeather.setItems(hourlyWeathers);
+        } else{
+            Notification.show("No data available", 3000, Notification.Position.MIDDLE);
         }
     }
 
