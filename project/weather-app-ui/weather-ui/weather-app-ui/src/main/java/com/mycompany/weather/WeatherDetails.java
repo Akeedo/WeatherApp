@@ -31,6 +31,7 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
     private HorizontalLayout layout;
 
     private Grid<DailyWeather> gridDailyWeather;
+    private Grid<HourlyWeather> gridHourlyWeather;
 
     private static final Logger LOGGER = LogManager.getLogger(WeatherDetails.class);
 
