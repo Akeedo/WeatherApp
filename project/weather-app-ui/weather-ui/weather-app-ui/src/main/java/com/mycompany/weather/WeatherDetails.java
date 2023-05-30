@@ -47,6 +47,7 @@ public class WeatherDetails extends VerticalLayout implements HasUrlParameter<St
         layout = new HorizontalLayout();
         gridDailyWeather = new Grid<>(DailyWeather.class);
         gridHourlyWeather = new Grid<>(HourlyWeather.class);
+        gridHourlyWeather.setVisible(false);
         add(layout,gridDailyWeather,gridHourlyWeather);
     }
 
