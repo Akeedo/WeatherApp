@@ -1,0 +1,11 @@
+{
+  "compatibilityMode": false,
+  "productionMode": false,
+  "npmFolder": "/home/akeed/Akeed/Projects/My_Projects/Xalu Weather Forecast Updgrade/WeatherApp/project/weather-forecast",
+  "generatedFolder": "/home/akeed/Akeed/Projects/My_Projects/Xalu Weather Forecast Updgrade/WeatherApp/project/weather-forecast/target/frontend",
+  "frontendFolder": "/home/akeed/Akeed/Projects/My_Projects/Xalu Weather Forecast Updgrade/WeatherApp/project/weather-forecast/frontend",
+  "pnpm.enable": false,
+  "require.home.node": false,
+  "node.version": "v14.15.4",
+  "node.download.root": "https://nodejs.org/dist/"
+}
