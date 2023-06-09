@@ -1,5 +1,6 @@
 package com.mycompany.weather.jwt;
 
+import static  com.mycompany.weather.jwt.Constants.REMEMBERME_VALIDITY_SECONDS;
 
 
 
