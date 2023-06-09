@@ -2,6 +2,10 @@ package com.mycompany.weather.jwt;
 
 import static  com.mycompany.weather.jwt.Constants.REMEMBERME_VALIDITY_SECONDS;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
 
 
 public class TokenProvider {
