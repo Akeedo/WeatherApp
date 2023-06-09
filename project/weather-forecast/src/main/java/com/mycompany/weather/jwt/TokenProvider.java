@@ -46,4 +46,15 @@ public class TokenProvider {
 
         return  new JWTCredential(claims.getSubject(), authorities);
     }
+
+    public boolean validateToken(String authToken){
+        try{
+            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(authToken);
+            return true;
+        }
+        catch(SignatureException e){
+             e.getMessage();
+             return false;
+        }
+    }
 }
