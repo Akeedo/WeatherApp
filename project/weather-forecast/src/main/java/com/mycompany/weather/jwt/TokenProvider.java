@@ -33,4 +33,17 @@ public class TokenProvider {
             .compact();
     }
 
+    public  JWTCredential getCredential(String token){
+        Claims claims = Jwts.parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token)
+                .getBody();
+
+        Set<String> authorities
+                = Arrays.asList(claims.get(AUTHORITIES_KEY).toString().split(","))
+                .stream()
+                .collect(Collectors.toSet());
+
+        return  new JWTCredential(claims.getSubject(), authorities);
+    }
 }
