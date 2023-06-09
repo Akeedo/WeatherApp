@@ -12,6 +12,25 @@ public class TokenProvider {
 
     long tokenValidityForRememberMe;
 
+    //TODO: Need to change @PostConstruct in other way
+    @PostConstruct
+    public void init(){
+        this.secretKey = "my-secret-jwt-key";
+        this.tokenValidity = TimeUnit.HOURS.toMillis(10);
+        //TODO: Need to do it in better way this tokenValidityForRememberMe initialization
+        this.tokenValidityForRememberMe = TimeUnit.SECONDS.toMillis(REMEMBERME_VALIDITY_SECONDS);
+    }
 
+    public String createToken(String username, Set<String> authorities, Boolean rememberMe){
+        long now = (new Date()).getTime();
+        long validity = rememberMe ? tokenValidityForRememberMe : tokenValidity;
+
+        return Jwts.builder()
+            .setSubject(username)
+            .claim(AUTHORITIES_KEY, authorities.stream().collect(Collectors.joining(",")))
+            .signWith(SignatureAlgorithm.HS512,secretKey)
+            .setExpiration(new Date(now + validity))
+            .compact();
+    }
 
 }
