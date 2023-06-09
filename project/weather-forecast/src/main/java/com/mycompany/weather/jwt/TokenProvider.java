@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import javax.annotation.PostConstruct;
 
 public class TokenProvider {
     static final String AUTHORITIES_KEY ="auth";
