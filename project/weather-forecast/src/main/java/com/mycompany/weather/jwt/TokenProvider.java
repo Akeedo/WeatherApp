@@ -8,6 +8,11 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import org.slf4j.Logger;
 
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class TokenProvider {
     static final String AUTHORITIES_KEY ="auth";
