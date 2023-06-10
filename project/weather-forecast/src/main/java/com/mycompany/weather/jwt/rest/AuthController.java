@@ -4,6 +4,12 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.inject.Inject;
+import javax.security.enterprise.SecurityContext;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
 public class AuthController {
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
