@@ -1,7 +1,10 @@
 package com.mycompany.weather.jwt.rest;
+import javax.json.JsonObject;
 public class SampleController {
     private static final Logger logger = LoggerFactory.getLogger(SampleController.class);
 
+    @Inject
+    private SecurityContext securityContext;
     @GET
     @Path("read")
     @PermitAll
