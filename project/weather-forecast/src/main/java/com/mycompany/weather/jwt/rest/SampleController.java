@@ -19,6 +19,7 @@ public class SampleController {
 
     @Inject
     private SecurityContext securityContext;
+
     @GET
     @Path("read")
     @PermitAll
