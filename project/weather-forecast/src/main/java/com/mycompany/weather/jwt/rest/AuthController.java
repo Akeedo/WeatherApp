@@ -2,6 +2,8 @@ package com.mycompany.weather.jwt.rest;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 public class AuthController {
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
