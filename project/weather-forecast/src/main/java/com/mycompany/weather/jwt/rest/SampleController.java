@@ -17,4 +17,15 @@ public class SampleController {
                 .build();
                 return Response.ok(result).build();
     }
+
+    @POST
+    @Path("write")
+    public Response write(){
+        logger.info("write");
+        JsonObject result = Json.createObjectBuilder()
+                .add("user", securityContext.getCallerPrincipal().getName())
+                .add("message", "Write resource")
+                .build();
+        return Response.ok(result).build();
+    }
 }
