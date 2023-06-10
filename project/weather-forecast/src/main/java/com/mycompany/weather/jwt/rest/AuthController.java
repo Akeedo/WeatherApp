@@ -4,4 +4,17 @@ public class AuthController {
 
     @Inject
     private SecurityContext securityContext;
+
+    @GET
+    @Path("login")
+    public Response login(){
+        logger.info("login");
+        if(securityContext.getCallerPrincipal() != null){
+            JsonObject result = Json.createObjectBuilder()
+                    .add("user", securityContext.getCallerPrincipal().getName())
+                    .build();
+            return Response.ok(result).build();
+        }
+        return Response.status(UNAUTHORIZED).build();
+    }
 }
