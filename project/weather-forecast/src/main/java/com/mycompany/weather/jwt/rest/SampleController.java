@@ -28,4 +28,15 @@ public class SampleController {
                 .build();
         return Response.ok(result).build();
     }
+
+    @DELETE
+    @Path("delete")
+    public Response delete(){
+        logger.info("delete");
+        JsonObject result = Json.createObjectBuilder()
+                .add("user", securityContext.getCallerPrincipal().getName())
+                .add("message", "Delete resource")
+                .build();
+        return Response.ok(result).build();
+    }
 }
