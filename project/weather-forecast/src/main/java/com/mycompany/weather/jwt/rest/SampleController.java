@@ -1,5 +1,15 @@
 package com.mycompany.weather.jwt.rest;
+import javax.annotation.security.PermitAll;
+import javax.inject.Inject;
+import javax.json.Json;
 import javax.json.JsonObject;
+import javax.security.enterprise.SecurityContext;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
+
 public class SampleController {
     private static final Logger logger = LoggerFactory.getLogger(SampleController.class);
 
