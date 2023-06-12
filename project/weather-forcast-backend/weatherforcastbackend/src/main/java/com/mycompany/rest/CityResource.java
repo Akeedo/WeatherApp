@@ -1,4 +1,6 @@
 package com.mycompany.rest;
+
+@Path("/city")
 public class CityResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
