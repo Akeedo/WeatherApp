@@ -15,8 +15,10 @@ public class Main {
 
         ServletHolder jerseyServlet = context.addServlet(ServletContainer.class, "/api/*");
         jerseyServlet.setInitOrder(0);
-        jerseyServlet.setInitParameter("jersey.config.server.provider.classnames",
-            HelloWorldResource.class.getCanonicalName());
+
+        // Set package to scan for resources
+        jerseyServlet.setInitParameter("jersey.config.server.provider.packages",
+            "com.mycompany");
 
         try {
             jettyServer.start();
