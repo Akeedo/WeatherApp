@@ -8,4 +8,10 @@ public class CityResourceTest {
     }
 
     @Test
+    public void testGetCity(){
+        City city = cityResource.getCity();
+        assertEquals("New York", city.getName());
+        assertEquals("USA",city.getCountry());
+        assertEquals(860000, city.getPopulation());
+    }
 }
