@@ -1,4 +1,10 @@
 import com.mycompany.rest.CityResource;
+import com.mycompany.entity.City;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
 public class CityResourceTest {
     private CityResource cityResource;
 
