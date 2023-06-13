@@ -1,4 +1,5 @@
 package com.mycompany.rest;
+@Path("/user")
 public class UserResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
