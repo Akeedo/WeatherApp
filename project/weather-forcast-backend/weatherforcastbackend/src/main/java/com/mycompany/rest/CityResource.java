@@ -10,6 +10,8 @@ import javax.ws.rs.core.MediaType;
 @Path("/city")
 public class CityResource {
     private final Logger log = LoggerFactory.getLogger(CityResource.class);
+    @Autowired
+    private CityService cityService;
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public City getCity(){
